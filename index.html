@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>WebRTC - Nodejs</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body>
+    <div id="div-signup">
+        <br>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4">
+                    <div>
+                        <div class="input-group">
+                            <input type="text" id="txtUserName" class="form-control" placeholder="Username" />
+                            <button class="btn btn-info" id="btnSignUp">SignUp</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+
+    </div>
+    <div id="div-chat">
+
+        <div class="jumbotron jumbotron-fluid">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-lg-4">
+
+                        <hr class="my-2">
+                        <b>Calling To ID : </b>
+                        <p class="lead">
+                        <div class="input-group">
+                            <input type="text" id="remoteId" class="form-control" placeholder="RemoteID" />
+                            <button class="btn btn-primary" id="btnCall">Call</button>
+                        </div>
+                        </p>
+                    </div>
+                    <div class="col-lg-8">
+                        <div class="card-deck">
+
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5>User Online</h5>
+                                </div>
+                                <div class="card-body"
+                                    style="display: flex;align-items: flex-end; align-self: flex-end;">
+                                    <ul class="list-group" id="ulUser">
+
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <h1 id="my-peer" style="display: none;"></h1>
+            <br>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="card text-left">
+                        <div class="card-body">
+                            <video id="localStream" width="100%" controls></video>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="card text-left">
+                        <div class="card-body">
+                            <video id="remoteStream" width="100%" controls></video>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</body>
+
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="jquery.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"
+    integrity="sha512-v8ng/uGxkge3d1IJuEo6dJP8JViyvms0cly9pnbfRxT6/31c3dRWxIiwGnMSWwZjHKOuY3EVmijs7k1jz/9bLA=="
+    crossorigin="anonymous"></script>
+<script src="peer.js"></script>
+<script src="main.js"></script>
+</body>
+
+</html>
