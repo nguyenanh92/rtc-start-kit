@@ -24,11 +24,11 @@ const socket = io('https://nvs-rtc-start-kit.herokuapp.com');
 $('#div-chat').hide();
 
 
-socket.on('DANH_SACH_ONLINE', arrUserInfo => {
+socket.on('DANH_SACH_ONLINE', user => {
     $('#div-signup').hide();
     $('#div-chat').show();
 
-    arrUserInfo.forEach(user => {
+    user.forEach(user => {
         const { ten, peerId } = user;
         $('#ulUser').append(`<li class="list-group-item" id="${peerId}"><b>${ten}</b></li>`)
     });
