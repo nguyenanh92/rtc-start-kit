@@ -47,64 +47,65 @@ socket.on('DANH_SACH_ONLINE', user => {
 
 socket.on('DANG_KY_THAT_BAI', () => alert('Username does not exit !!'));
 
+
 function openStream() {
-    const config = {
-        audio: false,
-        video: true,
-    }
+    const config = { audio: false, video: true };
     return navigator.mediaDevices.getUserMedia(config);
 }
 
 function playStream(idVideoTag, stream) {
     const video = document.getElementById(idVideoTag);
     video.srcObject = stream;
-    video.load();
+    video.play();
 }
-// openStream().then(stream => playStream('localStream' , stream));
 
-
+function playStream2(idVideoTag, stream) {
+    const video = document.getElementById(idVideoTag);
+    video.srcObject = stream;
+    video.play();
+}
 const peer = new Peer({
     host : '0.peerjs.com',
     config: { iceServers: [{ urls: 'stun:stun.l.google.com:19302' }, { urls: 'stun:global.stun.twilio.com:3478?transport=udp' }] }
 });
 
-// const peer = new Peer({key : 'peerjs' , host : 'nvs-rtc-start-kit.herokuapp.com' , secure : true , port :443, path : '/index'});
 
 peer.on('open', id => {
     $('#my-peer').append(id);
-
-    $("#btnSignUp").click(() => {
-        const username = $('#txtUserName').val();
+    $('#btnSignUp').click(() => {
+        const username = $('#txtUsername').val();
         socket.emit('NGUOI_DUNG_DANG_KY', { ten: username, peerId: id });
     });
 });
 
-
-//caller
-$("#btnCall").click(() => {
+//Caller
+$('#btnCall').click(() => {
     const id = $('#remoteId').val();
-    openStream().then(stream => {
+    openStream()
+    .then(stream => {
         playStream('localStream', stream);
         const call = peer.call(id, stream);
-        call.on('stream', remoteStream => playStream('remoteStream', remoteStream));
+        call.on('stream', remoteStream => playStream2('remoteStream', remoteStream));
     });
 });
 
-
+//Callee
 peer.on('call', call => {
-    openStream().then(stream => {
+    openStream()
+    .then(stream => {
         call.answer(stream);
         playStream('localStream', stream);
-        call.on('stream', remoteStream => playStream('remoteStream', remoteStream));
-    })
-})
+        call.on('stream', remoteStream => playStream2('remoteStream', remoteStream));
+    });
+});
 
-
-$('#ulUser').on('click', 'li', function (){
+$('#ulUser').on('click', 'li', function() {
     const id = $(this).attr('id');
-    openStream().then(stream => {
+    console.log(id);
+    openStream()
+    .then(stream => {
         playStream('localStream', stream);
         const call = peer.call(id, stream);
-        call.on('stream', remoteStream => playStream('remoteStream', remoteStream));
+        call.on('stream', remoteStream => playStream2('remoteStream', remoteStream));
     });
 });
