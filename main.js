@@ -61,11 +61,7 @@ function playStream(idVideoTag, stream) {
     video.play();
 }
 
-function playStream2(idVideoTag, stream) {
-    const video = document.getElementById(idVideoTag);
-    video.srcObject = stream;
-    video.play();
-}
+
 const peer = new Peer({
     host : '0.peerjs.com',
     config: { iceServers: [{ urls: 'stun:stun.l.google.com:19302' }, { urls: 'stun:global.stun.twilio.com:3478?transport=udp' }] }
@@ -87,7 +83,7 @@ $('#btnCall').click(() => {
     .then(stream => {
         playStream('localStream', stream);
         const call = peer.call(id, stream);
-        call.on('stream', remoteStream => playStream2('remoteStream', remoteStream));
+        call.on('stream', remoteStream => playStream('remoteStream', remoteStream));
     });
 });
 
@@ -97,7 +93,7 @@ peer.on('call', call => {
     .then(stream => {
         call.answer(stream);
         playStream('localStream', stream);
-        call.on('stream', remoteStream => playStream2('remoteStream', remoteStream));
+        call.on('stream', remoteStream => playStream('remoteStream', remoteStream));
     });
 });
 
@@ -108,6 +104,6 @@ $('#ulUser').on('click', 'li', function() {
     .then(stream => {
         playStream('localStream', stream);
         const call = peer.call(id, stream);
-        call.on('stream', remoteStream => playStream2('remoteStream', remoteStream));
+        call.on('stream', remoteStream => playStream('remoteStream', remoteStream));
     });
 });
