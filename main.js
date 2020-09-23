@@ -6,7 +6,7 @@ var ice;
 
 $('#div-chat').hide();
 
-$(document).ready(function){
+$(document).ready(function (){
     $(function(){
         // Get Xirsys ICE (STUN/TURN)
         if(!ice){
@@ -20,7 +20,7 @@ $(document).ready(function){
             });
         }
     });
-}
+});
 socket.on('DANH_SACH_ONLINE', user => {
     $('#div-signup').hide();
     $('#div-chat').show();
