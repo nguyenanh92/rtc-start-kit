@@ -8,7 +8,7 @@ io.on('connection', socket => {
         socket.peerId = user.peerId;
         if(isExit){return socket.emit('DANG_KY_THAT_BAI')}
         arrUserInfo.push(user);
-        socket.emit('DANH_SACH_ONLINE', user);
+        socket.emit('DANH_SACH_ONLINE', arrUserInfo);
         socket.broadcast.emit('CO_NGUOI_DUNG_MOI' , user);
     });
 
