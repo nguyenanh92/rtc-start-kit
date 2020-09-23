@@ -1,26 +1,29 @@
 const socket = io('https://nvs-rtc-start-kit.herokuapp.com');
 
-navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
-var ice;
 
+let customConfig;
+
+$.ajax({
+  url: "https://service.xirsys.com/ice",
+  data: {
+    ident: "lovehlmmm",
+    secret: "55572294-fd49-11ea-b45c-0242ac15000",
+    domain: "https://nguyenanh92.github.io/rtc-start-kit",
+    application: "default",
+    room: "default",
+    secure: 1
+  },
+  success: function (data, status) {
+    // data.d is where the iceServers object lives
+    customConfig = data.d;
+    console.log(customConfig);
+  },
+  async: false
+});
 
 $('#div-chat').hide();
 
-$(document).ready(function (){
-    $(function(){
-        // Get Xirsys ICE (STUN/TURN)
-        if(!ice){
-            ice = new $xirsys.ice('/webrtc');
-            ice.on(ice.onICEList, function (evt){
-                console.log('onICE ',evt);
-                if(evt.type == ice.onICEList){
-                    create(ice.iceServers);
-                    console.log('iceServers')
-                }
-            });
-        }
-    });
-});
+
 socket.on('DANH_SACH_ONLINE', user => {
     $('#div-signup').hide();
     $('#div-chat').show();
@@ -44,7 +47,6 @@ socket.on('DANH_SACH_ONLINE', user => {
 
 socket.on('DANG_KY_THAT_BAI', () => alert('Username does not exit !!'));
 
-
 function openStream() {
     const config = {
         audio: false,
@@ -63,7 +65,7 @@ function playStream(idVideoTag, stream) {
 
 const peer = new Peer({
     host : '0.peerjs.com',
-    config: ice.iceServers 
+    config: customConfig 
 });
 
 // const peer = new Peer({key : 'peerjs' , host : 'nvs-rtc-start-kit.herokuapp.com' , secure : true , port :443, path : '/index'});
