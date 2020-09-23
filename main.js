@@ -58,7 +58,15 @@ function openStream() {
 function playStream(idVideoTag, stream) {
     const video = document.getElementById(idVideoTag);
     video.srcObject = stream;
-    video.play();
+    var playPromise = video.play();
+    if (playPromise !== undefined) {
+        playPromise.then(_ => {
+            video.play()
+        })
+        .catch(error => {
+            console.log(error)
+        });
+      }
 }
 // openStream().then(stream => playStream('localStream' , stream));
 
