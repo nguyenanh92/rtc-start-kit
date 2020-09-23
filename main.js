@@ -3,23 +3,24 @@ const socket = io('https://nvs-rtc-start-kit.herokuapp.com');
 navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
 var ice;
 
-$(function(){
-    // Get Xirsys ICE (STUN/TURN)
-    if(!ice){
-        ice = new $xirsys.ice('/webrtc');
-        ice.on(ice.onICEList, function (evt){
-            console.log('onICE ',evt);
-            if(evt.type == ice.onICEList){
-                create(ice.iceServers);
-                console.log('iceServers')
-            }
-        });
-    }
-});
 
 $('#div-chat').hide();
 
-
+$(document).ready(function){
+    $(function(){
+        // Get Xirsys ICE (STUN/TURN)
+        if(!ice){
+            ice = new $xirsys.ice('/webrtc');
+            ice.on(ice.onICEList, function (evt){
+                console.log('onICE ',evt);
+                if(evt.type == ice.onICEList){
+                    create(ice.iceServers);
+                    console.log('iceServers')
+                }
+            });
+        }
+    });
+}
 socket.on('DANH_SACH_ONLINE', user => {
     $('#div-signup').hide();
     $('#div-chat').show();
