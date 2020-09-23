@@ -47,12 +47,14 @@ socket.on('DANH_SACH_ONLINE', user => {
 
 socket.on('DANG_KY_THAT_BAI', () => alert('Username does not exit !!'));
 
+
 function openStream() {
+    var getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
     const config = {
         audio: false,
         video: true,
     }
-    return navigator.mediaDevices.getUserMedia(config);
+    return getUserMedia(config);
 }
 
 function playStream(idVideoTag, stream) {
