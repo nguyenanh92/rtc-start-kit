@@ -1,25 +1,25 @@
 const socket = io('https://nvs-rtc-start-kit.herokuapp.com');
 
 
-let customConfig;
+// let customConfig;
 
-$.ajax({
-  url: "https://service.xirsys.com/ice",
-  data: {
-    ident: "lovehlmmm",
-    secret: "55572294-fd49-11ea-b45c-0242ac15000",
-    domain: "https://nguyenanh92.github.io/rtc-start-kit",
-    application: "default",
-    room: "default",
-    secure: 1
-  },
-  success: function (data, status) {
-    // data.d is where the iceServers object lives
-    customConfig = data.d;
-    console.log(customConfig);
-  },
-  async: false
-});
+// $.ajax({
+//   url: "https://service.xirsys.com/ice",
+//   data: {
+//     ident: "lovehlmmm",
+//     secret: "55572294-fd49-11ea-b45c-0242ac15000",
+//     domain: "https://nguyenanh92.github.io/rtc-start-kit",
+//     application: "default",
+//     room: "default",
+//     secure: 1
+//   },
+//   success: function (data, status) {
+//     // data.d is where the iceServers object lives
+//     customConfig = data.d;
+//     console.log(customConfig);
+//   },
+//   async: false
+// });
 
 $('#div-chat').hide();
 
