@@ -29,12 +29,14 @@ socket.on('DANH_SACH_ONLINE', arrUserInfo => {
     $('#div-chat').show();
 
     arrUserInfo.forEach(user => {
-        const { ten, peerId } = user;
+        console.log('user-online', user);
+        const {ten ,peerId } = user;
         $('#ulUser').append(`<li class="list-group-item" id="${peerId}"><b>${ten}</b></li>`)
     });
 
     socket.on('CO_NGUOI_DUNG_MOI', user => {
-        const { ten, peerId } = user;
+        console.log('new-online',user);
+        const {ten ,peerId } = user;
         $('#ulUser').append(`<li class="list-group-item" id="${peerId}"><b>${ten}</b></li>`)
     });
 
@@ -64,6 +66,7 @@ function playStream2(idVideoTag, stream) {
     video.srcObject = stream;
     video.play();
 }
+
 const peer = new Peer({
     host : '0.peerjs.com',
     config: { iceServers: [{ urls: 'stun:stun.l.google.com:19302' }, { urls: 'stun:global.stun.twilio.com:3478?transport=udp' }] }
@@ -74,6 +77,7 @@ peer.on('open', id => {
     $('#my-peer').append(id);
     $('#btnSignUp').click(() => {
         const username = $('#txtUsername').val();
+        console.log('signup' , username);
         socket.emit('NGUOI_DUNG_DANG_KY', { ten: username, peerId: id });
     });
 });
