@@ -65,7 +65,7 @@ function playStream(idVideoTag, stream) {
 
 const peer = new Peer({
     host : '0.peerjs.com',
-    config: customConfig 
+    config: { iceServers: [{ urls: 'stun:stun.l.google.com:19302' }, { urls: 'stun:global.stun.twilio.com:3478?transport=udp' }] }
 });
 
 // const peer = new Peer({key : 'peerjs' , host : 'nvs-rtc-start-kit.herokuapp.com' , secure : true , port :443, path : '/index'});
