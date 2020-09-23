@@ -29,11 +29,13 @@ socket.on('DANH_SACH_ONLINE', user => {
     $('#div-chat').show();
 
     user.forEach(user => {
+        console.log('user-online', user);
         const { ten, peerId } = user;
         $('#ulUser').append(`<li class="list-group-item" id="${peerId}"><b>${ten}</b></li>`)
     });
 
     socket.on('CO_NGUOI_DUNG_MOI', user => {
+        console.log('user-new', user);
         const { ten, peerId } = user;
         $('#ulUser').append(`<li class="list-group-item" id="${peerId}"><b>${ten}</b></li>`)
     });
