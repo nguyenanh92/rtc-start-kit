@@ -1,5 +1,5 @@
 
-const socket = io('http://localhost:3000');
+const socket = io('https://nvs-rtc-start-kit.herokuapp.com');
 
 $('#div-chat').hide();
 
@@ -19,7 +19,8 @@ socket.on('DANH_SACH_ONLINE', user => {
     });
 
     socket.on('AI_DO_NGAT_KET_NOI', peerId => {
-        $(`${peerId}`).remove();
+        console.log(peerId);
+        $(`#${peerId}`).remove();
     });
 
 });
@@ -28,8 +29,8 @@ socket.on('DANG_KY_THAT_BAI', () => alert('Username does not exit !!'));
 
 function openStream() {
     const config = {
-        audio: true,
-        video: false,
+        audio: false,
+        video: true,
     }
     return navigator.mediaDevices.getUserMedia(config);
 }
@@ -42,7 +43,7 @@ function playStream(idVideoTag, stream) {
 // openStream().then(stream => playStream('localStream' , stream));
 
 
-const peer = new Peer();
+const peer = new Peer({key: 'peerjs' , host: 'https://nvs-rtc-start-kit.herokuapp.com' , secure: true, port : 443});
 
 peer.on('open', id => {
     $('#my-peer').append(id);
@@ -73,3 +74,12 @@ peer.on('call', call => {
     })
 })
 
+
+$('#ulUser').on('click', 'li', function (){
+    const id = $(this).attr('id');
+    openStream().then(stream => {
+        playStream('localStream', stream);
+        const call = peer.call(id, stream);
+        call.on('stream', remoteStream => playStream('remoteStream', remoteStream));
+    });
+});
