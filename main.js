@@ -43,7 +43,7 @@ function playStream(idVideoTag, stream) {
 // openStream().then(stream => playStream('localStream' , stream));
 
 
-const peer = new Peer();
+const peer = new Peer({host : '0.peerjs.com'});
 
 // const peer = new Peer({key : 'peerjs' , host : 'nvs-rtc-start-kit.herokuapp.com' , secure : true , port :443, path : '/index'});
 
