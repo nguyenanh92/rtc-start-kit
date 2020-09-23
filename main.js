@@ -56,10 +56,10 @@ function openStream() {
     return navigator.mediaDevices.getUserMedia(config);
 }
 
-function playStream(idVideoTag, stream) {
+ async function playStream(idVideoTag, stream) {
     const video = document.getElementById(idVideoTag);
     video.srcObject = stream;
-    video.play();
+    await video.play();
 }
 
 const peer = new Peer({
